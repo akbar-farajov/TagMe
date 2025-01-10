@@ -5,6 +5,7 @@ import "./globals.css";
 import { AppSidebar } from "@/components/app-sidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { createClient } from "@/utils/supabase/server";
+import { cn } from "@/lib/utils";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -12,8 +13,8 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Next.js and Supabase Starter Kit",
-  description: "The fastest way to build apps with Next.js and Supabase",
+  title: "Instagram Clone",
+  description: "Instagram Clone built with Next.js and Supabase",
 };
 
 const geistSans = Geist({
@@ -28,6 +29,7 @@ export default async function RootLayout({
 }>) {
   const supabase = await createClient();
   const { data: userResponse } = await supabase.auth.getUser();
+
   return (
     <html lang="en" className={geistSans.className} suppressHydrationWarning>
       <body className="bg-background text-foreground">
@@ -38,8 +40,15 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <SidebarProvider>
-            <main className=" min-h-screen w-full flex items-center justify-center md:ml-[80px] lg:ml-[240px]">
-              {userResponse.user && <AppSidebar />}
+            {" "}
+            {userResponse.user && <AppSidebar />}
+            <main
+              className={cn(
+                " min-h-screen w-full flex items-center justify-center",
+                userResponse.user && "md:ml-[80px] lg:ml-[240px]"
+              )}
+            >
+              {" "}
               {children}
             </main>
           </SidebarProvider>
