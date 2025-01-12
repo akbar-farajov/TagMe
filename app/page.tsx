@@ -1,3 +1,4 @@
+import Feed from "@/components/feed/feed";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
@@ -15,7 +16,9 @@ export default async function Home() {
   return (
     <>
       <div className="flex-1 flex flex-col gap-6 px-4 min-h-screen">
-        <div className="flex-1">hello</div>
+        <div className="flex-1">
+          <Feed />
+        </div>
       </div>
     </>
   );
