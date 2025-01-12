@@ -1,4 +1,4 @@
-import Feed from "@/components/feed/feed";
+import { Feed } from "@/components/feed";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 

@@ -4,8 +4,9 @@ import { Heart, MessageCircle, Bookmark, Share, Divide } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { createClient } from "@/utils/supabase/server";
 import { Post } from "@/utils/supabase/database";
+import { LikeButton } from "./like-button";
 
-async function Feed() {
+export async function Feed() {
   const supabase = await createClient();
   const {
     data: { user },
@@ -15,8 +16,6 @@ async function Feed() {
     .from("follows")
     .select("following_id")
     .eq("follower_id", user?.id);
-
-  console.log(followingData);
 
   const followingIds =
     followingData?.map((follow) => follow.following_id) || [];
@@ -77,8 +76,12 @@ async function Feed() {
 
           {/* Post Actions */}
           <div className="p-3">
-            <div className="flex items-center gap-4">
-              <Heart className="w-6 h-6 cursor-pointer " />
+            <div className="flex items-start gap-4">
+              <LikeButton
+                postId={post.id}
+                userId={user?.id}
+                initialLikes={post.likes}
+              />
               <MessageCircle className="w-6 h-6 cursor-pointer " />
               <Share className="w-6 h-6 cursor-pointer " />
               <div className="ml-auto">
@@ -120,5 +123,3 @@ async function Feed() {
     </div>
   );
 }
-
-export default Feed;
