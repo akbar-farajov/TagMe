@@ -1,5 +1,12 @@
 "use client";
-import { Calendar, CirclePlus, Home, Search, Settings } from "lucide-react";
+import {
+  Calendar,
+  CirclePlus,
+  Home,
+  Menu,
+  Search,
+  Settings,
+} from "lucide-react";
 
 import {
   Sidebar,
@@ -13,7 +20,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import SignUpButton from "./sign-up-button";
+import SignUpButton from "../sign-up-button";
+import { SidebarContextMenu } from "./sidebar-context-menu";
 
 // Menu items.
 const items = [
@@ -47,17 +55,16 @@ const items = [
 
 export function AppSidebar() {
   const pathname = usePathname();
-  console.log(pathname);
 
   return (
     <Sidebar className="w-[80px] lg:w-[240px]">
-      <SidebarContent className="bg-background px-1">
+      <SidebarContent className="bg-background px-1 py-6">
         <SidebarGroup className="flex flex-col justify-between h-full">
           <SidebarGroupContent>
             <SidebarMenu>
               <Link
                 href="/"
-                className="hidden lg:block px-4 text-2xl font-semibold py-6"
+                className="hidden lg:block px-4 text-2xl font-semibold pb-6"
               >
                 Instagram
               </Link>
@@ -79,9 +86,11 @@ export function AppSidebar() {
                 );
               })}
             </SidebarMenu>
-          </SidebarGroupContent>
+          </SidebarGroupContent>{" "}
+          <SidebarContextMenu />
         </SidebarGroup>
-        <SignUpButton />
+
+        {/* <SignUpButton /> */}
       </SidebarContent>
     </Sidebar>
   );

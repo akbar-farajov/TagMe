@@ -1,11 +1,11 @@
 import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
-
 import "./globals.css";
 import { AppSidebar } from "@/components/app-sidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { createClient } from "@/utils/supabase/server";
 import { cn } from "@/lib/utils";
+import { Suspense } from "react";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -40,7 +40,6 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <SidebarProvider>
-            {" "}
             {userResponse.user && <AppSidebar />}
             <main
               className={cn(
@@ -48,8 +47,7 @@ export default async function RootLayout({
                 userResponse.user && "md:ml-[80px] lg:ml-[240px]"
               )}
             >
-              {" "}
-              {children}
+              <Suspense fallback={null}>{children}</Suspense>
             </main>
           </SidebarProvider>
         </ThemeProvider>
