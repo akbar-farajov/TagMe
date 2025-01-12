@@ -1,34 +1,48 @@
 import React from "react";
 import Image from "next/image";
-import { Heart, MessageCircle, Bookmark, Share } from "lucide-react";
+import { Heart, MessageCircle, Bookmark, Share, Divide } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { createClient } from "@/utils/supabase/server";
+import { Post } from "@/utils/supabase/database";
 
 async function Feed() {
-  const supabase = createClient();
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  const { data: posts } = await (
-    await supabase
-  )
+  const { data: followingData } = await supabase
+    .from("follows")
+    .select("following_id")
+    .eq("follower_id", user?.id);
+
+  console.log(followingData);
+
+  const followingIds =
+    followingData?.map((follow) => follow.following_id) || [];
+
+  const userIds = [...followingIds, user?.id];
+
+  const { data: posts, error } = await supabase
     .from("posts")
     .select(
       `
     *,
-    profiles (
+    profiles!inner (
+      id,
       username,
       avatar_url,
       full_name
     ),
     likes (
-      id
+      user_id
     ),
-    comments (
-      id,
-      content
-    )
+    comments (count)
   `
     )
-    .order("created_at", { ascending: false });
+    .in("user_id", userIds)
+    .order("created_at", { ascending: false })
+    .returns<Post[]>();
 
   if (!posts) return <div>No posts found</div>;
 
@@ -36,7 +50,6 @@ async function Feed() {
     <div className="max-w-lg mx-auto py-4 px-4 md:px-0">
       {posts.map((post) => (
         <article key={post.id} className="border rounded-lg mb-6">
-          {/* Post Header */}
           <div className="flex items-center p-3">
             <div className="h-8 w-8 relative rounded-full overflow-hidden">
               <Image

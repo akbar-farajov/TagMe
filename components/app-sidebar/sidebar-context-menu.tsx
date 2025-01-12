@@ -2,6 +2,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
@@ -48,6 +49,7 @@ export const SidebarContextMenu = () => {
             <Monitor size={16} /> System
           </Button>
         </DropdownMenuItem>
+        <DropdownMenuSeparator />
 
         <DropdownMenuItem className="rounded-lg cursor-pointer flex justify-start p-0 mt-2">
           <form action={signOutAction} className="flex-1 flex">
