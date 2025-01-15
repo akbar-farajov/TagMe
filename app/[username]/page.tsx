@@ -1,6 +1,7 @@
 
-function ProfilePage({params}:{params:{profile:string}}) {
-  console.log(params.profile)
+
+function ProfilePage() {
+
   return (
     <div>ProfilePage</div>
   )
