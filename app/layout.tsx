@@ -28,8 +28,8 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const supabase = await createClient();
-  const { data: userResponse } = await supabase.auth.getUser();
-
+  const { data: {user} } = await supabase.auth.getUser();
+  const {data:profile} = await supabase.from("profiles").select("*").eq("id", user?.id).single()
   return (
     <html lang="en" className={geistSans.className} suppressHydrationWarning>
       <body className="bg-background text-foreground">
@@ -40,11 +40,11 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <SidebarProvider>
-            {userResponse.user && <AppSidebar />}
+            {user && <AppSidebar profile={profile}/>}
             <main
               className={cn(
                 " min-h-screen w-full flex items-center justify-center",
-                userResponse.user && "md:ml-[80px] lg:ml-[240px]"
+                user && "md:ml-[80px] lg:ml-[240px]"
               )}
             >
               <Suspense fallback={null}>{children}</Suspense>
