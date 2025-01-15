@@ -90,11 +90,11 @@ export async function Feed() {
             </div>
 
             {/* Likes */}
-            <div className="mt-2">
+            {/* <div className="mt-2">
               <p className="font-semibold text-sm">
                 {post.likes.length} {post.likes.length === 1 ? "like" : "likes"}
               </p>
-            </div>
+            </div> */}
 
             {/* Caption */}
             <div className="mt-1">

@@ -18,11 +18,21 @@ export function LikeButton({ postId, userId, initialLikes }: LikeButtonProps) {
     initialLikes.some((like) => like.user_id === userId)
   );
 
-  async function handleLike() {
-    await toggleLike(postId);
-    setIsLiked((prev) => !prev);
-  }
+  const [likesCount, setLikesCount] = useState(initialLikes.length)
+  const [processing, setProcessing] = useState(false);
 
+  async function handleLike() {
+    if (processing) return; 
+    setProcessing(true);
+
+    const newIsLiked = !isLiked;
+    setIsLiked(newIsLiked);
+    setLikesCount((prev) => prev + (newIsLiked ? 1 : -1));
+
+    const result = await toggleLike(postId);
+
+    setProcessing(false);
+  }
   return (
     <div className="flex items-center gap-2">
       <Button
@@ -43,7 +53,7 @@ export function LikeButton({ postId, userId, initialLikes }: LikeButtonProps) {
           }`}
         />
       </Button>
-      {/* <span>{likesCount}</span> */}
+      <span className="font-semibold text-sm">{likesCount} {likesCount === 1 ?"like":"likes"}</span>
     </div>
   );
 }
