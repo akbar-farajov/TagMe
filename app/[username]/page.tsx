@@ -2,7 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 import { FollowButton } from "./components/follow-button";
 
 async function ProfilePage({ params }: { params: { username: string } }) {
-  const { username } = params;
+  const { username } = await params;
 
   const supabase = await createClient();
 
