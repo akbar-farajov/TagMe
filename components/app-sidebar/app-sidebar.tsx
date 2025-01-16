@@ -22,7 +22,8 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { SidebarContextMenu } from "./sidebar-context-menu";
 import Image from "next/image";
-import { CreatePostModal } from "./create-post-modal";
+import { CreatePostModal } from "../create-post-modal";
+import { Profile } from "@/utils/supabase/database";
 
 // Menu items.
 const items = [
@@ -42,14 +43,6 @@ const items = [
     icon: Settings,
   },
 ];
-
-interface Profile {
-  id: string;
-  username: string;
-  full_name: string;
-  avatar_url: string | null;
-  bio: string | null;
-}
 
 export function AppSidebar({ profile }: { profile: Profile }) {
   const pathname = usePathname();

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -75,18 +75,23 @@ export function CreatePostModal() {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <SidebarMenuItem
-          className={cn(
-            "flex items-center justify-center lg:justify-start gap-3 p-3 hover:bg-muted rounded-lg cursor-pointer text-base"
-          )}
-        >
-          <CirclePlus size={24} />
-          <span className="hidden lg:inline">Create Post</span>
-        </SidebarMenuItem>
-      </DialogTrigger>
+        <div>
+          <Button variant="ghost" className="md:hidden">
+            <CirclePlus size={20} />
+          </Button>
 
-      <DialogContent className="sm:max-w-md bg-background px-0 pb-0 !rounded-xl">
-        <DialogHeader className="flex items-center justify-between">
+          <SidebarMenuItem
+            className={cn(
+              "items-center justify-center hidden md:flex lg:justify-start gap-3 p-3 hover:bg-muted rounded-lg cursor-pointer text-base"
+            )}
+          >
+            <CirclePlus size={24} />
+            <span className="hidden lg:inline">Create Post</span>
+          </SidebarMenuItem>
+        </div>
+      </DialogTrigger>
+      <DialogContent className="max-w-xs sm:max-w-md bg-background px-0 pb-0 !rounded-xl">
+        <DialogHeader className="flex items-center justify-between mt-2 md:mt-0">
           {step === 2 && (
             <Button
               variant="ghost"
@@ -97,11 +102,11 @@ export function CreatePostModal() {
               <ArrowLeft size={20} />
             </Button>
           )}
-          <div>
-            <DialogTitle className="text-center flex-1">
-              {step === 1 ? "Create New Post" : ""}
-            </DialogTitle>
-          </div>
+
+          <DialogTitle className="text-center flex-1">
+            {step === 1 ? "Create New Post" : ""}
+          </DialogTitle>
+
           {step === 2 && (
             <Button
               variant="ghost"
@@ -121,7 +126,7 @@ export function CreatePostModal() {
             </div>
           ) : (
             <div className="flex flex-col gap-4 h-full p-4 bg-background rounded-b-xl">
-              <div className=" flex  border-b rounded-xl mt-4">
+              <div className=" flex border-b h-40 md:h-48 rounded-xl mt-4">
                 {selectedFile && (
                   <img
                     src={URL.createObjectURL(selectedFile)}

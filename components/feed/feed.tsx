@@ -1,10 +1,18 @@
 import React from "react";
 import Image from "next/image";
-import { Heart, MessageCircle, Bookmark, Share, Divide } from "lucide-react";
+import {
+  Heart,
+  MessageCircle,
+  Bookmark,
+  Share,
+  Divide,
+  UserCircle,
+} from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { createClient } from "@/utils/supabase/server";
 import { Post } from "@/utils/supabase/database";
 import { LikeButton } from "./like-button";
+import Link from "next/link";
 
 export async function Feed() {
   const supabase = await createClient();
@@ -46,20 +54,28 @@ export async function Feed() {
   if (!posts) return <div>No posts found</div>;
 
   return (
-    <div className="max-w-lg mx-auto py-4 px-4 md:px-0">
+    <div className="max-w-lg mx-auto py-4">
       {posts.map((post) => (
-        <article key={post.id} className="border rounded-lg mb-6">
+        <article key={post.id} className="md:border rounded-lg mb-6">
           <div className="flex items-center p-3">
-            <div className="h-8 w-8 relative rounded-full overflow-hidden">
-              <Image
-                src={post.profiles.avatar_url || "/api/placeholder/32/32"}
-                alt={post.profiles.username}
-                fill
-                className="object-cover"
-              />
-            </div>
+            {post.profiles.avatar_url ? (
+              <div className="h-8 w-8 relative rounded-full overflow-hidden">
+                <Image
+                  src={post.profiles.avatar_url}
+                  alt={post.profiles.username}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            ) : (
+              <UserCircle className="object-cover" />
+            )}
             <div className="ml-3">
-              <p className="font-semibold text-sm">{post.profiles.username}</p>
+              <Link href={`/${post.profiles.username}`}>
+                <p className="font-semibold text-sm cursor-pointer">
+                  {post.profiles.username}
+                </p>
+              </Link>
             </div>
           </div>
 

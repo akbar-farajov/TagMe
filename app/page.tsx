@@ -16,7 +16,7 @@ export default async function Home() {
 
   return (
     <>
-      <div className="flex-1 flex flex-col gap-6 px-4 min-h-screen">
+      <div className="flex-1 flex flex-col gap-6 md:px-4 min-h-screen">
         <div className="flex-1">
           <Suspense fallback={<div>Loading...</div>}>
             <Feed />

@@ -7,6 +7,7 @@ import { createClient } from "@/utils/supabase/server";
 import { cn } from "@/lib/utils";
 import { Suspense } from "react";
 import { Providers } from "./providers";
+import { MobileBar } from "@/components/mobile-bar";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -49,6 +50,7 @@ export default async function RootLayout({
           >
             <SidebarProvider>
               {user && <AppSidebar profile={profile} />}
+              <MobileBar profile={profile} />
               <main
                 className={cn(
                   " min-h-screen w-full flex items-center justify-center",
