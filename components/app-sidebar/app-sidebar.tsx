@@ -64,7 +64,7 @@ export function AppSidebar({ profile }: { profile: Profile }) {
                 href="/"
                 className="hidden lg:block px-4 text-2xl font-semibold pb-6"
               >
-                Instagram
+                TagMe
               </Link>
               {items.map((item) => {
                 const aciveItem = pathname === item.url;

@@ -14,8 +14,8 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Instagram Clone",
-  description: "Instagram Clone built with Next.js and Supabase",
+  title: "TagMe",
+  description: "TagMe built with Next.js and Supabase",
 };
 
 const geistSans = Geist({
