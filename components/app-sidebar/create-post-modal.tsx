@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { FileUpload } from "../ui/file-upload";
 import { uploadPost } from "@/actions/posts";
+import { useRouter } from "next/navigation";
 
 export function CreatePostModal() {
   const [step, setStep] = useState(1);
@@ -23,7 +24,7 @@ export function CreatePostModal() {
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const { toast } = useToast();
-
+  const router = useRouter();
   const handleFileUpload = async (files: File[]) => {
     setSelectedFile(files[0]);
     setStep(2);
@@ -59,6 +60,7 @@ export function CreatePostModal() {
       setSelectedFile(null);
       setCaption("");
       setIsOpen(false);
+      router.push("/");
     } catch (error) {
       toast({
         variant: "destructive",
