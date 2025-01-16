@@ -1,6 +1,7 @@
 import { Feed } from "@/components/feed";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
+import { Suspense } from "react";
 
 export default async function Home() {
   const supabase = await createClient();
@@ -17,7 +18,9 @@ export default async function Home() {
     <>
       <div className="flex-1 flex flex-col gap-6 px-4 min-h-screen">
         <div className="flex-1">
-          <Feed />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Feed />
+          </Suspense>
         </div>
       </div>
     </>

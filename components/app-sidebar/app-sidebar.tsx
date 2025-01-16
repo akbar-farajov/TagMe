@@ -22,6 +22,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { SidebarContextMenu } from "./sidebar-context-menu";
 import Image from "next/image";
+import { CreatePostModal } from "./create-post-modal";
 
 // Menu items.
 const items = [
@@ -36,22 +37,10 @@ const items = [
     icon: Search,
   },
   {
-    title: "Calendar",
-    url: "#",
-    icon: Calendar,
-  },
-
-  {
     title: "Settings",
     url: "#",
     icon: Settings,
   },
-  {
-    title: "Create Post",
-    url: "/create-post",
-    icon: CirclePlus,
-  },
-
 ];
 
 interface Profile {
@@ -62,7 +51,7 @@ interface Profile {
   bio: string | null;
 }
 
-export function AppSidebar({profile}:{profile:Profile}) {
+export function AppSidebar({ profile }: { profile: Profile }) {
   const pathname = usePathname();
 
   return (
@@ -88,24 +77,42 @@ export function AppSidebar({profile}:{profile:Profile}) {
                         aciveItem && "font-bold"
                       )}
                     >
-                      {item.icon &&   <item.icon size={24} className={cn("", aciveItem?"fill-white text-muted":"")}/>}
+                      {item.icon && (
+                        <item.icon
+                          size={24}
+                          className={cn(
+                            "",
+                            aciveItem ? "fill-white text-muted" : ""
+                          )}
+                        />
+                      )}
                       <span className="hidden lg:inline">{item.title}</span>
                     </SidebarMenuItem>
                   </Link>
                 );
               })}
-               <Link href={`/${profile.username}`}>
-                    <SidebarMenuItem
-                      className={cn(
-                        "flex items-center justify-center lg:justify-start gap-3 p-3 hover:bg-muted rounded-lg cursor-pointer text-base ",
-                        // aciveItem && "font-bold"
-                      )}
-                    >
-                    
-                      {profile.avatar_url ? <Image alt="profile" className="rounded-full" width={24} height={24} src={profile.avatar_url}/>:<CircleUser size={24}/>}
-                      <span className="hidden lg:inline">{profile.username}</span>
-                    </SidebarMenuItem>
-                  </Link>
+              <CreatePostModal />
+              <Link href={`/${profile.username}`}>
+                <SidebarMenuItem
+                  className={cn(
+                    "flex items-center justify-center lg:justify-start gap-3 p-3 hover:bg-muted rounded-lg cursor-pointer text-base "
+                    // aciveItem && "font-bold"
+                  )}
+                >
+                  {profile.avatar_url ? (
+                    <Image
+                      alt="profile"
+                      className="rounded-full"
+                      width={24}
+                      height={24}
+                      src={profile.avatar_url}
+                    />
+                  ) : (
+                    <CircleUser size={24} />
+                  )}
+                  <span className="hidden lg:inline">{profile.username}</span>
+                </SidebarMenuItem>
+              </Link>
             </SidebarMenu>
           </SidebarGroupContent>{" "}
           <SidebarContextMenu />
