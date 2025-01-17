@@ -13,6 +13,8 @@ import { createClient } from "@/utils/supabase/server";
 import { Post } from "@/utils/supabase/database";
 import { LikeButton } from "./like-button";
 import Link from "next/link";
+import { Separator } from "../ui/separator";
+import { PostCard } from "./post";
 
 export async function Feed() {
   const supabase = await createClient();
@@ -54,87 +56,12 @@ export async function Feed() {
   if (!posts) return <div>No posts found</div>;
 
   return (
-    <div className="max-w-lg mx-auto py-4">
+    <div className="max-w-md mx-auto py-4">
       {posts.map((post) => (
-        <article key={post.id} className="md:border rounded-lg mb-6">
-          <div className="flex items-center p-3">
-            {post.profiles.avatar_url ? (
-              <div className="h-8 w-8 relative rounded-full overflow-hidden">
-                <Image
-                  src={post.profiles.avatar_url}
-                  alt={post.profiles.username}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            ) : (
-              <UserCircle className="object-cover" />
-            )}
-            <div className="ml-3">
-              <Link href={`/${post.profiles.username}`}>
-                <p className="font-semibold text-sm cursor-pointer">
-                  {post.profiles.username}
-                </p>
-              </Link>
-            </div>
-          </div>
-
-          {/* Post Image */}
-          <div className="relative aspect-square">
-            <Image
-              src={post.image_url}
-              alt="Post content"
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
-
-          {/* Post Actions */}
-          <div className="p-3">
-            <div className="flex items-start gap-4">
-              <LikeButton
-                postId={post.id}
-                userId={user?.id}
-                initialLikes={post.likes}
-              />
-              <MessageCircle className="w-6 h-6 cursor-pointer " />
-              <Share className="w-6 h-6 cursor-pointer " />
-              <div className="ml-auto">
-                <Bookmark className="w-6 h-6 cursor-pointer" />
-              </div>
-            </div>
-
-            {/* Likes */}
-            {/* <div className="mt-2">
-              <p className="font-semibold text-sm">
-                {post.likes.length} {post.likes.length === 1 ? "like" : "likes"}
-              </p>
-            </div> */}
-
-            {/* Caption */}
-            <div className="mt-1">
-              <p className="text-sm">
-                <span className="font-semibold mr-2">
-                  {post.profiles.username}
-                </span>
-                {post.caption}
-              </p>
-            </div>
-
-            {/* Comments */}
-            {post.comments.length > 0 && (
-              <p className="text-sm mt-1 cursor-pointer">
-                View all {post.comments.length} comments
-              </p>
-            )}
-
-            {/* Timestamp */}
-            <p className=" text-xs mt-1 uppercase">
-              {formatDistanceToNow(new Date(post.created_at))} ago
-            </p>
-          </div>
-        </article>
+        <>
+          <PostCard post={post} userId={user?.id} />
+          <Separator />
+        </>
       ))}
     </div>
   );

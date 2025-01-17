@@ -18,7 +18,7 @@ export const SidebarContextMenu = () => {
       <DropdownMenuTrigger asChild>
         <SidebarMenuItem className="flex items-center justify-center lg:justify-start gap-3 p-3 hover:bg-muted rounded-lg cursor-pointer text-base">
           <Menu size={24} />
-          <span>More</span>
+          <span className="hidden lg:inline">More</span>
         </SidebarMenuItem>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-64 rounded-xl p-2" align="start">

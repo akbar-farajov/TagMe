@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -90,7 +91,10 @@ export function CreatePostModal() {
           </SidebarMenuItem>
         </div>
       </DialogTrigger>
-      <DialogContent className="max-w-xs sm:max-w-md bg-background px-0 pb-0 !rounded-xl">
+      <DialogContent
+        aria-describedby="Post create"
+        className="max-w-xs sm:max-w-md bg-background px-0 pb-0 !rounded-xl"
+      >
         <DialogHeader className="flex items-center justify-between mt-2 md:mt-0">
           {step === 2 && (
             <Button
@@ -106,6 +110,7 @@ export function CreatePostModal() {
           <DialogTitle className="text-center flex-1">
             {step === 1 ? "Create New Post" : ""}
           </DialogTitle>
+          <DialogDescription className="invisible">Hello</DialogDescription>
 
           {step === 2 && (
             <Button

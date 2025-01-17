@@ -49,8 +49,12 @@ export default async function RootLayout({
             disableTransitionOnChange
           >
             <SidebarProvider>
-              {user && <AppSidebar profile={profile} />}
-              <MobileBar profile={profile} />
+              {user && (
+                <>
+                  <AppSidebar profile={profile} />
+                  <MobileBar profile={profile} />
+                </>
+              )}
               <main
                 className={cn(
                   " min-h-screen w-full flex items-center justify-center",
