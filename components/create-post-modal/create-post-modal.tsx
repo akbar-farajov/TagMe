@@ -15,7 +15,7 @@ import { CirclePlus, ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { FileUpload } from "../ui/file-upload";
-import { uploadPost } from "@/actions/posts";
+import { uploadPost } from "@/app/actions/posts";
 import { useRouter } from "next/navigation";
 
 export function CreatePostModal() {

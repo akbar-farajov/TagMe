@@ -24,6 +24,7 @@ import { SidebarContextMenu } from "./sidebar-context-menu";
 import Image from "next/image";
 import { CreatePostModal } from "../create-post-modal";
 import { Profile } from "@/utils/supabase/database";
+import { SearchComponent } from "../search-component/search-component";
 
 // Menu items.
 const items = [
@@ -32,11 +33,7 @@ const items = [
     url: "/",
     icon: Home,
   },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search,
-  },
+
   {
     title: "Settings",
     url: "#",
@@ -103,9 +100,11 @@ export function AppSidebar({ profile }: { profile: Profile }) {
                   ) : (
                     <CircleUser size={24} />
                   )}
+
                   <span className="hidden lg:inline">{profile.username}</span>
                 </SidebarMenuItem>
               </Link>
+              <SearchComponent />
             </SidebarMenu>
           </SidebarGroupContent>{" "}
           <SidebarContextMenu />
