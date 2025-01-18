@@ -114,15 +114,26 @@ export interface Database {
 // Types for components
 export type Profile = Database["public"]["Tables"]["profiles"]["Row"];
 export type Post = Database["public"]["Tables"]["posts"]["Row"] & {
-  profiles: Profile;
+  profiles: {
+    id: string;
+    username: string;
+    avatar_url: string | null;
+    full_name: string | null;
+  };
   likes: Array<{
     id: string;
     user_id: string;
+    created_at: string;
   }>;
   comments: Array<{
     id: string;
     content: string;
     user_id: string;
     created_at: string;
+    profiles: {
+      id: string;
+      username: string;
+      avatar_url: string | null;
+    };
   }>;
 };

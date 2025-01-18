@@ -46,7 +46,7 @@ export async function Feed() {
     likes (
       user_id
     ),
-    comments (count)
+    comments (*)
   `
     )
     .in("user_id", userIds)
@@ -56,7 +56,7 @@ export async function Feed() {
   if (!posts) return <div>No posts found</div>;
 
   return (
-    <div className="max-w-md mx-auto py-4">
+    <div className="max-w-md mx-auto py-4 mb-4">
       {posts.map((post) => (
         <>
           <PostCard post={post} userId={user?.id} />

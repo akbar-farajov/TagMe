@@ -12,6 +12,7 @@ import React from "react";
 import { CreatePostModal } from "../create-post-modal";
 import { DialogTrigger } from "../ui/dialog";
 import { Button } from "../ui/button";
+import { SearchComponent } from "../search-component/search-component";
 
 export const MobileBar = ({ profile }: { profile: Profile }) => {
   const items = [
@@ -20,11 +21,7 @@ export const MobileBar = ({ profile }: { profile: Profile }) => {
       url: "/",
       icon: HomeIcon,
     },
-    {
-      title: "Search",
-      url: "#",
-      icon: Search,
-    },
+
     {
       title: "Settings",
       url: "#",
@@ -41,6 +38,7 @@ export const MobileBar = ({ profile }: { profile: Profile }) => {
         </Link>
       ))}
 
+      <SearchComponent />
       <CreatePostModal />
 
       <Link href={`/${profile.username}`}>

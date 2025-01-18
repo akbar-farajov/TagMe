@@ -93,9 +93,9 @@ export function CreatePostModal() {
       </DialogTrigger>
       <DialogContent
         aria-describedby="Post create"
-        className="max-w-xs sm:max-w-md bg-background px-0 pb-0 !rounded-xl"
+        className="max-w-xs sm:max-w-md bg-background px-0 pb-0 !rounded-xl space-y-0"
       >
-        <DialogHeader className="flex items-center justify-between mt-2 md:mt-0">
+        <DialogHeader className="flex-row items-center justify-between mt-2 md:mt-0">
           {step === 2 && (
             <Button
               variant="ghost"

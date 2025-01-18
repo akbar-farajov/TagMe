@@ -15,13 +15,10 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
+
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { createClient } from "@/utils/supabase/server";
 import { PostDeleteItem } from "./post-delete-button";
-import { unfollowUser } from "@/app/actions/follow";
 import { PostUserUnfollowButton } from "./post-user-unfollow-button";
 
 export const PostCard = async ({
@@ -32,20 +29,7 @@ export const PostCard = async ({
   userId?: string;
 }) => {
   const isCurrentUserPost = post.user_id === userId;
-  const supabase = await createClient();
 
-  async function deletePost(postId: string, userId: string) {
-    "use server";
-
-    const supabase = await createClient();
-    const { error } = await supabase
-      .from("posts")
-      .delete()
-      .eq("id", postId)
-      .eq("user_id", userId);
-
-    return { error };
-  }
   return (
     <article key={post.id} className="rounded-lg my-2">
       <div className="flex items-center justify-between px-3 md:px-0">
@@ -131,7 +115,7 @@ export const PostCard = async ({
         </div>
 
         {/* Comments */}
-        {post.comments.length > 0 && (
+        {post.comments.length !== 0 && (
           <p className="text-sm mt-1 cursor-pointer">
             View all {post.comments.length} comments
           </p>

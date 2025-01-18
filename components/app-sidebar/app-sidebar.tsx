@@ -72,7 +72,9 @@ export function AppSidebar({ profile }: { profile: Profile }) {
                           size={24}
                           className={cn(
                             "",
-                            aciveItem ? "fill-white text-muted" : ""
+                            aciveItem
+                              ? "fill-black dark:fill-white text-muted"
+                              : ""
                           )}
                         />
                       )}
@@ -81,7 +83,9 @@ export function AppSidebar({ profile }: { profile: Profile }) {
                   </Link>
                 );
               })}
+              <SearchComponent />
               <CreatePostModal />
+
               <Link href={`/${profile.username}`}>
                 <SidebarMenuItem
                   className={cn(
@@ -104,7 +108,6 @@ export function AppSidebar({ profile }: { profile: Profile }) {
                   <span className="hidden lg:inline">{profile.username}</span>
                 </SidebarMenuItem>
               </Link>
-              <SearchComponent />
             </SidebarMenu>
           </SidebarGroupContent>{" "}
           <SidebarContextMenu />
