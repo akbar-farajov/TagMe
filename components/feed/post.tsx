@@ -15,7 +15,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { PostDeleteItem } from "./post-delete-button";
@@ -115,6 +114,7 @@ export const PostCard = async ({
         </div>
 
         {/* Comments */}
+
         {post.comments.length !== 0 && (
           <p className="text-sm mt-1 cursor-pointer">
             View all {post.comments.length} comments

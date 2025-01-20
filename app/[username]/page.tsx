@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { CircleUser, User } from "lucide-react";
 import { Posts } from "./components/posts";
 import { Separator } from "@/components/ui/separator";
+import { signOutAction } from "../actions";
 
 async function ProfilePage({
   params,
@@ -47,13 +48,38 @@ async function ProfilePage({
 
   const { data: posts } = await supabase
     .from("posts")
-    .select("*")
+    .select(
+      `
+      *,
+      profiles (
+        id,
+        username,
+        avatar_url,
+        full_name
+      ),
+      likes (
+        id,
+        user_id,
+        created_at
+      ),
+      comments (
+        id,
+        content,
+        user_id,
+        created_at,
+        profiles (
+          id,
+          username,
+          avatar_url
+        )
+      )
+    `
+    )
     .eq("user_id", profile.id);
 
   return (
     <div className="flex-1 py-10 md:px-10 flex flex-col items-start w-full h-full">
-      {/* top */}
-      <div className="px-2 md:px-20 lg:px-32 pb-10 w-full flex items-center md:gap-24 gap-4">
+      <div className="px-2 md:px-20 lg:px-32 pb-10 w-full flex items-start md:gap-24 gap-4">
         <div className="relative size-16 md:size-32">
           {profile.avatar_url ? (
             <Image
@@ -68,7 +94,7 @@ async function ProfilePage({
           )}
         </div>
         <div className="flex flex-col items-start justify-center gap-4 mb-8">
-          <div className="flex gap-4 items-center">
+          <div className="flex gap-4 items-start">
             <h1 className="text-base font-bold mb-2">{profile.username}</h1>
             {user && user.id !== profile.id ? (
               <FollowButton
@@ -77,12 +103,22 @@ async function ProfilePage({
                 initialIsFollowing={!!isFollowing}
               />
             ) : (
-              <Button
-                variant="secondary"
-                className="font-bold text-xs rounded-lg h-8"
-              >
-                Edit Profile
-              </Button>
+              <div className="flex flex-wrap gap-2">
+                <Button
+                  variant="secondary"
+                  className="font-bold text-xs rounded-lg h-8"
+                >
+                  Edit
+                </Button>
+                <form action={signOutAction}>
+                  <Button
+                    type="submit"
+                    className="font-bold text-xs rounded-lg h-8"
+                  >
+                    Sign Out
+                  </Button>
+                </form>
+              </div>
             )}
           </div>
           <div className="gap-8 items-center hidden md:flex">
