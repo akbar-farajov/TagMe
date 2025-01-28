@@ -58,10 +58,10 @@ export async function Feed() {
   return (
     <div className="max-w-md mx-auto py-4 mb-4">
       {posts.map((post) => (
-        <>
+        <div key={post.id}>
           <PostCard post={post} userId={user?.id} />
           <Separator />
-        </>
+        </div>
       ))}
     </div>
   );

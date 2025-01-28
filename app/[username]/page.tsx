@@ -6,6 +6,7 @@ import { CircleUser, User } from "lucide-react";
 import { Posts } from "./components/posts";
 import { Separator } from "@/components/ui/separator";
 import { signOutAction } from "../actions";
+import { FollowersDialog } from "./components/followers-dialog";
 
 async function ProfilePage({
   params,
@@ -25,8 +26,24 @@ async function ProfilePage({
     .select(
       `
     *,
-    followers:follows!follows_following_id_fkey(count),
-    following:follows!follows_follower_id_fkey(count),
+    followers:follows!follows_following_id_fkey(
+      follower_id,
+      profiles:profiles!follower_id(
+        id,
+        username,
+        avatar_url,
+        full_name
+      )
+    ),
+    following:follows!follows_follower_id_fkey(
+      following_id,
+      profiles:profiles!following_id(
+        id,
+        username,
+        avatar_url,
+        full_name
+      )
+    ),
     posts:posts(count)
   `
     )
@@ -126,12 +143,15 @@ async function ProfilePage({
               {profile.posts[0].count}{" "}
               <span className="font-normal">posts</span>
             </p>
+            <FollowersDialog followers={profile.followers}>
+              <Button variant="ghost" className="font-bold gap-1 text-base">
+                {profile.followers.length}
+                <span className="font-normal">followers</span>
+              </Button>
+            </FollowersDialog>
+
             <Button variant="ghost" className="font-bold gap-1 text-base">
-              {profile.followers[0].count}{" "}
-              <span className="font-normal">followers</span>
-            </Button>
-            <Button variant="ghost" className="font-bold gap-1 text-base">
-              {profile.following[0].count}{" "}
+              {profile.following.length}
               <span className="font-normal">followings</span>
             </Button>
           </div>
@@ -149,10 +169,10 @@ async function ProfilePage({
           {profile.posts[0].count} <p className="font-normal">posts</p>
         </div>
         <div className="font-bold text-xs text-center">
-          {profile.followers[0].count} <p className="font-normal">followers</p>
+          {profile.followers.length} <p className="font-normal">followers</p>
         </div>
         <div className="font-bold text-xs text-center">
-          {profile.following[0].count} <p className="font-normal">followings</p>
+          {profile.following.length} <p className="font-normal">followings</p>
         </div>
       </div>
       <Separator />

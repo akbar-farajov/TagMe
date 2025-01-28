@@ -56,10 +56,10 @@ export function AppSidebar({ profile }: { profile: Profile }) {
               >
                 TagMe
               </Link>
-              {items.map((item) => {
+              {items.map((item, index) => {
                 const aciveItem = pathname === item.url;
                 return (
-                  <Link href={item.url} key={item.title}>
+                  <Link href={item.url} key={index}>
                     <SidebarMenuItem
                       key={item.title}
                       className={cn(

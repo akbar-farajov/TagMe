@@ -11,6 +11,7 @@ import { Profile } from "@/utils/supabase/database";
 import { searchUsers } from "@/app/actions/search";
 import { useTransition } from "react";
 import { Skeleton } from "../ui/skeleton";
+import UserInfo from "../user-info";
 
 interface SearchResult {
   type: "user";
@@ -122,34 +123,13 @@ export function SearchComponent() {
             ) : (
               <div className="space-y-2">
                 {results.map((result, index) => (
-                  <div
+                  <UserInfo
+                    onclick={() => handleResultClick(result)}
                     key={index}
-                    onClick={() => handleResultClick(result)}
-                    className="flex items-center gap-3 p-2 hover:bg-muted rounded-md cursor-pointer"
-                  >
-                    {result.data.avatar_url ? (
-                      <div className="size-8 relative aspect-square">
-                        <Image
-                          src={result.data.avatar_url}
-                          alt={result.data.username}
-                          className="rounded-full object-cover"
-                          fill
-                        />
-                      </div>
-                    ) : (
-                      <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
-                        <CircleUser className="size-8 text-muted-foreground" />
-                      </div>
-                    )}
-                    <div className="flex flex-col">
-                      <span className="font-medium">
-                        {result.data.username}
-                      </span>
-                      <span className="text-sm text-muted-foreground">
-                        {result.data.full_name}
-                      </span>
-                    </div>
-                  </div>
+                    username={result.data.username}
+                    full_name={result.data.full_name ?? ""}
+                    avatar_url={result.data.avatar_url ?? ""}
+                  />
                 ))}
               </div>
             )}

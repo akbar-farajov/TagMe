@@ -30,8 +30,8 @@ export const MobileBar = ({ profile }: { profile: Profile }) => {
   ];
   return (
     <div className="w-full px-6 md:hidden fixed z-50 bottom-0 left-0 bg-background flex justify-between border-t">
-      {items.map((item) => (
-        <Link href={item.url} key={item.title}>
+      {items.map((item, index) => (
+        <Link href={item.url} key={index}>
           <Button variant="ghost">
             <item.icon size={20} />
           </Button>
