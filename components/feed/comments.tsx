@@ -17,6 +17,7 @@ import {
 import { ContextMenu } from "../ui/context-menu";
 import { Button } from "../ui/button";
 import { revalidatePath } from "next/cache";
+import Link from "next/link";
 type CommentProps = {
   postId: string;
 };
@@ -58,8 +59,11 @@ const Comments = async ({ postId }: CommentProps) => {
     return (
       <Accordion type="single" collapsible className="w-full">
         <AccordionItem value="item-1">
-          <AccordionTrigger className="text-sm mt-1 cursor-pointer text-left w-full py-2">
-            <div>View all {comments?.length} comments</div>
+          <AccordionTrigger className="text-sm mt-1 cursor-pointer text-left w-full py-2 hover:no-underline">
+            <div>
+              View all {comments?.length}{" "}
+              {comments.length === 1 ? "comment" : "comments"}
+            </div>
           </AccordionTrigger>
           <AccordionContent>
             {comments?.map((comment: Comment) => {
@@ -67,23 +71,29 @@ const Comments = async ({ postId }: CommentProps) => {
               return (
                 <div key={comment.id} className="flex justify-between w-full">
                   <div className="flex items-start space-x-4 py-2">
-                    {avatar_url ? (
-                      <div className="size-8 relative aspect-square">
-                        <Image
-                          src={avatar_url}
-                          alt="image"
-                          className="rounded-full object-cover"
-                          fill
-                        />
-                      </div>
-                    ) : (
-                      <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
-                        <CircleUser className="size-8 text-muted-foreground" />
-                      </div>
-                    )}
+                    <Link href={`/${username}`}>
+                      {avatar_url ? (
+                        <div className="size-8 relative aspect-square">
+                          <Image
+                            src={avatar_url}
+                            alt="image"
+                            className="rounded-full object-cover"
+                            fill
+                          />
+                        </div>
+                      ) : (
+                        <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
+                          <CircleUser className="size-8 text-muted-foreground" />
+                        </div>
+                      )}
+                    </Link>
 
                     <p>
-                      <span className="font-bold mr-2">{username}</span>
+                      <Link href={`/${username}`}>
+                        <span className="font-bold mr-2 hover:text-muted-foreground duration-200">
+                          {username}
+                        </span>
+                      </Link>
                       <span>{comment.content}</span>
                     </p>
                   </div>

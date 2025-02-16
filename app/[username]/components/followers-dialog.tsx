@@ -36,7 +36,11 @@ export function FollowersDialog({
         <DialogFooter>
           <div className="flex flex-col gap-3 w-full">
             {followers.map((follower) => (
-              <Link href={`/${follower.profiles.username}`} className="w-full">
+              <Link
+                href={`/${follower.profiles.username}`}
+                className="w-full"
+                key={follower.id}
+              >
                 <UserInfo
                   key={follower.id}
                   username={follower.profiles.username}

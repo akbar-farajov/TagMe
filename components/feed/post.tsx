@@ -95,8 +95,8 @@ export const PostCard = async ({
             userId={userId}
             initialLikes={post.likes}
           />
-          <MessageCircle className="w-6 h-6 cursor-pointer " />
-          <Share className="w-6 h-6 cursor-pointer " />
+          {/* <MessageCircle className="w-6 h-6 cursor-pointer " /> */}
+          {/* <Share className="w-6 h-6 cursor-pointer " /> */}
           <div className="ml-auto">
             <Bookmark className="w-6 h-6 cursor-pointer" />
           </div>
