@@ -7,9 +7,9 @@ import React from "react";
 interface SearchResult {}
 
 type Props = {
-  username: string;
-  avatar_url: string;
-  full_name: string;
+  username?: string;
+  avatar_url?: string;
+  full_name?: string;
   onclick?: () => void;
 };
 
@@ -28,7 +28,7 @@ export default function UserInfo({
         <div className="size-8 relative aspect-square">
           <Image
             src={avatar_url}
-            alt={username}
+            alt="image"
             className="rounded-full object-cover"
             fill
           />

@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { Suspense } from "react";
 import { LikeButton } from "./like-button";
 import { formatDistanceToNow } from "date-fns";
 import {
@@ -19,6 +19,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { PostDeleteItem } from "./post-delete-button";
 import { PostUserUnfollowButton } from "./post-user-unfollow-button";
+import { Input } from "../ui/input";
+import { commentAction } from "@/app/actions/comment";
+
+import Comments from "./comments";
 
 export const PostCard = async ({
   post,
@@ -112,19 +116,27 @@ export const PostCard = async ({
             {post.caption}
           </p>
         </div>
-
-        {/* Comments */}
-
-        {post.comments.length !== 0 && (
-          <p className="text-sm mt-1 cursor-pointer">
-            View all {post.comments.length} comments
-          </p>
-        )}
-
-        {/* Timestamp */}
         <p className=" text-xs mt-1 uppercase">
           {formatDistanceToNow(new Date(post.created_at))} ago
         </p>
+        <Suspense fallback={null}>
+          <Comments postId={post.id} />
+        </Suspense>
+        <form
+          action={async (formData: FormData) => {
+            "use server";
+            await commentAction(formData, post.id);
+          }}
+        >
+          <Input
+            placeholder="Add comment"
+            className="outline-none border-none focus-visible:ring-0 focus-visible:ring-offset-0 pl-0"
+            name="comment"
+            id="comment"
+          />
+        </form>
+
+        {/* Timestamp */}
       </div>
     </article>
   );
