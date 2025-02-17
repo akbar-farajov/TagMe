@@ -6,18 +6,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { CircleUser, Ellipsis } from "lucide-react";
+import { CircleUser } from "lucide-react";
 import Image from "next/image";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
-import { ContextMenu } from "../ui/context-menu";
-import { Button } from "../ui/button";
-import { revalidatePath } from "next/cache";
+
 import Link from "next/link";
+import { CommentDeleteMenu } from "./comment-delete-menu";
 type CommentProps = {
   postId: string;
 };
@@ -34,7 +27,7 @@ type Comment = {
   };
 };
 
-const Comments = async ({ postId }: CommentProps) => {
+export const Comments = async ({ postId }: CommentProps) => {
   const supabase = await createClient();
 
   const {
@@ -99,34 +92,7 @@ const Comments = async ({ postId }: CommentProps) => {
                   </div>
                   <div>
                     {comment.user_id === user?.id && (
-                      <DropdownMenu>
-                        <DropdownMenuTrigger>
-                          <Ellipsis size={20} strokeWidth={1} />
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end" className="p-0">
-                          <form
-                            action={async () => {
-                              "use server";
-                              const supabase = await createClient();
-                              const { error } = await supabase
-                                .from("comments")
-                                .delete()
-                                .eq("id", comment.id)
-                                .throwOnError();
-
-                              revalidatePath("/");
-                            }}
-                          >
-                            <Button
-                              type="submit"
-                              variant="ghost"
-                              className="w-full text-red-600 hover:text-red-600"
-                            >
-                              Delete
-                            </Button>
-                          </form>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
+                      <CommentDeleteMenu commentId={comment.id} />
                     )}
                   </div>
                 </div>
@@ -138,5 +104,3 @@ const Comments = async ({ postId }: CommentProps) => {
     );
   return null;
 };
-
-export default Comments;

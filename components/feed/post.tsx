@@ -22,7 +22,7 @@ import { PostUserUnfollowButton } from "./post-user-unfollow-button";
 import { Input } from "../ui/input";
 import { commentAction } from "@/app/actions/comment";
 
-import Comments from "./comments";
+import { Comments } from "./comments";
 
 export const PostCard = async ({
   post,

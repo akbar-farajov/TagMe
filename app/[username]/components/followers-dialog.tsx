@@ -30,7 +30,10 @@ export function FollowersDialog({
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
-            <Input id="name" className="col-span-4" />
+            <Input
+              id="name"
+              className="col-span-4 focus-visible:ring-0 focus-visible:ring-offset-0"
+            />
           </div>
         </div>
         <DialogFooter>
