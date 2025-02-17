@@ -1,0 +1,22 @@
+ <svg
+              width="200"
+              height="200"
+              viewBox="0 0 200 200"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+            >
+              <rect width="200" height="200" rx="40" fill="#6C5CE7" />
+              <path d="M100 40L140 80L100 120L60 80L100 40Z" fill="#FFFFFF" />
+              <circle cx="100" cy="100" r="20" fill="#FD79A8" />
+              <text
+                x="50%"
+                y="170"
+                font-family="Arial, sans-serif"
+                font-size="32"
+                fill="#FFFFFF"
+                font-weight="bold"
+                text-anchor="middle"
+              >
+                TagMe
+              </text>
+            </svg>

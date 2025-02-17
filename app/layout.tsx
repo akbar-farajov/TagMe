@@ -8,12 +8,13 @@ import { cn } from "@/lib/utils";
 import { Suspense } from "react";
 import { Providers } from "./providers";
 import { MobileBar } from "@/components/mobile-bar";
+import type { Metadata } from "next";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "http://localhost:3000";
 
-export const metadata = {
+export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
   title: "TagMe",
   description: "TagMe built with Next.js and Supabase",

@@ -25,6 +25,7 @@ import Image from "next/image";
 import { CreatePostModal } from "../create-post-modal";
 import { Profile } from "@/utils/supabase/database";
 import { SearchComponent } from "../search-component/search-component";
+import Logo from "@/assets/logo.svg";
 
 // Menu items.
 const items = [
@@ -52,9 +53,10 @@ export function AppSidebar({ profile }: { profile: Profile }) {
             <SidebarMenu>
               <Link
                 href="/"
-                className="hidden lg:block px-4 text-2xl font-semibold pb-6"
+                className="hidden lg:flex items-center space-x-3 px-4 text-2xl font-semibold pb-6 "
               >
-                TagMe
+                <Image src={Logo} alt="img" width={24} height={24} />
+                <span>TagMe</span>
               </Link>
               {items.map((item, index) => {
                 const aciveItem = pathname === item.url;
