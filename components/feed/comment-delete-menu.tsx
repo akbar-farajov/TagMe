@@ -61,7 +61,6 @@ export const CommentDeleteMenu = ({ commentId }: CommentsDeleteMenuProps) => {
           >
             <Trash2 className="mr-2 h-4 w-4" />
             {isDeleting ? "Deleting..." : "Delete"}
-            Delete
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

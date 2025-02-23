@@ -13,7 +13,6 @@ import { signInAction } from "@/app/actions";
 import { SubmitButton } from "@/components/submit-button";
 import Link from "next/link";
 import { FormMessage, Message } from "@/components/form-message";
-import SignInWithGoogleButton from "../../sign-in-with-google-button";
 
 type SignInFormProps = React.ComponentPropsWithoutRef<"div"> & {
   message: Message;
@@ -66,7 +65,7 @@ export function SignInnForm({ className, message, ...props }: SignInFormProps) {
               >
                 Sign in
               </SubmitButton>
-              <SignInWithGoogleButton />
+              {/* <SignInWithGoogleButton /> */}
             </div>
             <div className="mt-4 text-center text-sm">
               Don&apos;t have an account?{" "}

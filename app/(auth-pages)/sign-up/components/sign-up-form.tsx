@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -13,7 +12,6 @@ import Link from "next/link";
 import { signUpAction } from "@/app/actions";
 import { SubmitButton } from "@/components/submit-button";
 import { FormMessage, Message } from "@/components/form-message";
-import SignInWithGoogleButton from "../../sign-in-with-google-button";
 
 type SignUpFormProps = React.ComponentPropsWithoutRef<"div"> & {
   message: Message;
@@ -33,8 +31,8 @@ export function SignUpForm({ className, message, ...props }: SignUpFormProps) {
           <form action={signUpAction}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
-                <SignInWithGoogleButton />
-                <div className="w-full text-center">Or</div>
+                {/* <SignInWithGoogleButton /> */}
+                {/* <div className="w-full text-center">Or</div> */}
                 <Label htmlFor="username">username</Label>
                 <Input name="username" placeholder="username" required />
                 <Label htmlFor="fullName">fullName</Label>
