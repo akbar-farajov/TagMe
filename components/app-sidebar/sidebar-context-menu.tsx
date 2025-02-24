@@ -8,7 +8,7 @@ import {
 import { Button } from "../ui/button";
 import { SidebarMenuItem } from "../ui/sidebar";
 import { Sun, Moon, Monitor, Menu } from "lucide-react";
-import { signOutAction } from "@/app/actions";
+import { signOutAction } from "@/lib/auth-actions";
 import { useTheme } from "next-themes";
 
 export const SidebarContextMenu = () => {

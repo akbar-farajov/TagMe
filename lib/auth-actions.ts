@@ -4,6 +4,7 @@ import { encodedRedirect } from "@/utils/utils";
 import { createClient } from "@/utils/supabase/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { data } from "autoprefixer";
 
 export const signUpAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();
@@ -124,6 +125,32 @@ export const resetPasswordAction = async (formData: FormData) => {
 
   encodedRedirect("success", "/reset-password", "Password updated");
 };
+
+export async function signInWithGoogle() {
+  const supabase = await createClient();
+  const SITE_URL = process.env.SITE_URL;
+
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      redirectTo: `${SITE_URL}/auth/callback`,
+      queryParams: {
+        access_type: "offline",
+        prompt: "consent",
+      },
+      scopes: "profile email",
+    },
+  });
+
+  console.log(data);
+
+  if (error) {
+    console.log(error);
+    redirect("/error");
+  }
+
+  redirect(data.url);
+}
 
 export const signOutAction = async () => {
   const supabase = await createClient();

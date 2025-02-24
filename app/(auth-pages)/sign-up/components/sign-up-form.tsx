@@ -9,9 +9,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
-import { signUpAction } from "@/app/actions";
+import { signUpAction } from "@/lib/auth-actions";
 import { SubmitButton } from "@/components/submit-button";
 import { FormMessage, Message } from "@/components/form-message";
+import SignInWithGoogleButton from "@/app/(auth-pages)/SigninWithGoogleButton";
 
 type SignUpFormProps = React.ComponentPropsWithoutRef<"div"> & {
   message: Message;
@@ -22,22 +23,19 @@ export function SignUpForm({ className, message, ...props }: SignUpFormProps) {
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl">Login</CardTitle>
+          <CardTitle className="text-xl">Login</CardTitle>
           <CardDescription>
             Enter your email below to login to your account
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="w-96">
           <form action={signUpAction}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
-                {/* <SignInWithGoogleButton /> */}
-                {/* <div className="w-full text-center">Or</div> */}
-                <Label htmlFor="username">username</Label>
+                <SignInWithGoogleButton />
+                <div className="w-full text-center">Or</div>
                 <Input name="username" placeholder="username" required />
-                <Label htmlFor="fullName">fullName</Label>
                 <Input name="fullName" placeholder="fullName" required />
-                <Label htmlFor="email">Email</Label>
                 <Input
                   name="email"
                   id="email"
@@ -45,17 +43,6 @@ export function SignUpForm({ className, message, ...props }: SignUpFormProps) {
                   placeholder="m@example.com"
                   required
                 />
-              </div>
-              <div className="grid gap-2">
-                <div className="flex items-center">
-                  <Label htmlFor="password">Password</Label>
-                  <Link
-                    href="#"
-                    className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                  >
-                    Forgot your password?
-                  </Link>
-                </div>
                 <Input
                   name="password"
                   id="password"
@@ -64,7 +51,15 @@ export function SignUpForm({ className, message, ...props }: SignUpFormProps) {
                   required
                 />
               </div>
+
+              <Link
+                href="#"
+                className="text-sm underline-offset-4 hover:underline"
+              >
+                Forgot your password?
+              </Link>
               <SubmitButton
+                variant="outline"
                 formAction={signUpAction}
                 pendingText="Signing up..."
               >

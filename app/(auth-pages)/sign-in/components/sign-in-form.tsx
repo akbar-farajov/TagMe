@@ -9,10 +9,11 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { signInAction } from "@/app/actions";
+import { signInAction } from "@/lib/auth-actions";
 import { SubmitButton } from "@/components/submit-button";
 import Link from "next/link";
 import { FormMessage, Message } from "@/components/form-message";
+import SignInWithGoogleButton from "@/app/(auth-pages)/SigninWithGoogleButton";
 
 type SignInFormProps = React.ComponentPropsWithoutRef<"div"> & {
   message: Message;
@@ -60,12 +61,13 @@ export function SignInnForm({ className, message, ...props }: SignInFormProps) {
                 />
               </div>
               <SubmitButton
+                variant="outline"
                 pendingText="Signing In..."
                 formAction={signInAction}
               >
                 Sign in
               </SubmitButton>
-              {/* <SignInWithGoogleButton /> */}
+              <SignInWithGoogleButton />
             </div>
             <div className="mt-4 text-center text-sm">
               Don&apos;t have an account?{" "}

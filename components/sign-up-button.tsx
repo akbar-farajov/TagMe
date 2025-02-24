@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "./ui/button";
-import { signOutAction } from "@/app/actions";
+import { signOutAction } from "@/lib/auth-actions";
 
 const SignUpButton = () => {
   return (

@@ -95,17 +95,19 @@ export function AppSidebar({ profile }: { profile: Profile }) {
                     // aciveItem && "font-bold"
                   )}
                 >
-                  {profile.avatar_url ? (
-                    <Image
-                      alt="profile"
-                      className="rounded-full"
-                      width={24}
-                      height={24}
-                      src={profile.avatar_url}
-                    />
-                  ) : (
-                    <CircleUser size={24} />
-                  )}
+                  <div className=" relative w-6 h-6 rounded-full">
+                    {profile.avatar_url ? (
+                      <Image
+                        alt="profile"
+                        className="rounded-full"
+                        fill
+                        objectFit="cover"
+                        src={profile.avatar_url}
+                      />
+                    ) : (
+                      <CircleUser />
+                    )}
+                  </div>
 
                   <span className="hidden lg:inline">{profile.username}</span>
                 </SidebarMenuItem>

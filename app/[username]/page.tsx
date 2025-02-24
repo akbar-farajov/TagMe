@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { CircleUser, User } from "lucide-react";
 import { Posts } from "./components/posts";
 import { Separator } from "@/components/ui/separator";
-import { signOutAction } from "../actions";
+import { signOutAction } from "@/lib/auth-actions";
 import { FollowersDialog } from "./components/followers-dialog";
 
 async function ProfilePage({
