@@ -1,3 +1,7 @@
+import { signOutAction } from "@/lib/auth-actions";
+import { Check, Menu, Monitor, Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
+import { Button } from "../ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -5,14 +9,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { Button } from "../ui/button";
 import { SidebarMenuItem } from "../ui/sidebar";
-import { Sun, Moon, Monitor, Menu } from "lucide-react";
-import { signOutAction } from "@/lib/auth-actions";
-import { useTheme } from "next-themes";
 
 export const SidebarContextMenu = () => {
-  const { setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -22,31 +22,49 @@ export const SidebarContextMenu = () => {
         </SidebarMenuItem>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-64 rounded-xl p-2" align="start">
-        <DropdownMenuItem className="rounded-lg cursor-pointer p-0">
+        <DropdownMenuItem
+          className="rounded-lg cursor-pointer p-0"
+          onSelect={() => setTheme("light")}
+        >
           <Button
             onClick={() => setTheme("light")}
             variant="ghost"
-            className="flex-1 justify-start gap-2"
+            className="flex-1 justify-between gap-2"
           >
-            <Sun size={16} /> Light
+            <div className="flex justify-start items-center gap-2">
+              <Sun size={16} /> Light
+            </div>
+            {theme === "light" && <Check size={16} />}
           </Button>
         </DropdownMenuItem>
-        <DropdownMenuItem className="rounded-lg cursor-pointer p-0">
+        <DropdownMenuItem
+          className="rounded-lg cursor-pointer p-0"
+          onSelect={() => setTheme("dark")}
+        >
           <Button
             onClick={() => setTheme("dark")}
             variant="ghost"
-            className="flex-1 justify-start gap-2"
+            className="flex-1 justify-between gap-2"
           >
-            <Moon size={16} /> Dark
+            <div className="flex justify-start items-center gap-2">
+              <Moon size={16} /> Dark
+            </div>
+            {theme === "dark" && <Check size={16} />}
           </Button>
         </DropdownMenuItem>
-        <DropdownMenuItem className="rounded-lg cursor-pointer p-0">
+        <DropdownMenuItem
+          className="rounded-lg cursor-pointer p-0"
+          onSelect={() => setTheme("system")}
+        >
           <Button
             onClick={() => setTheme("system")}
             variant="ghost"
-            className="flex-1 justify-start gap-2"
+            className="flex-1 justify-between gap-2"
           >
-            <Monitor size={16} /> System
+            <div className="flex justify-start items-center gap-2">
+              <Monitor size={16} /> System
+            </div>
+            {theme === "system" && <Check size={16} />}
           </Button>
         </DropdownMenuItem>
         <DropdownMenuSeparator />

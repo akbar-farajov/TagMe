@@ -1,26 +1,20 @@
-import { Post } from "@/utils/supabase/database";
-import {
-  Bookmark,
-  Ellipsis,
-  MessageCircle,
-  Share,
-  UserCircle,
-} from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import React, { Suspense } from "react";
-import { LikeButton } from "./like-button";
-import { formatDistanceToNow } from "date-fns";
+import { commentAction } from "@/app/actions/comment";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Post } from "@/utils/supabase/database";
+import { formatDistanceToNow } from "date-fns";
+import { Bookmark, Ellipsis, UserCircle } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { Suspense } from "react";
+import { Input } from "../ui/input";
+import { LikeButton } from "./like-button";
 import { PostDeleteItem } from "./post-delete-button";
 import { PostUserUnfollowButton } from "./post-user-unfollow-button";
-import { Input } from "../ui/input";
-import { commentAction } from "@/app/actions/comment";
 
 import { Comments } from "./comments";
 
@@ -34,7 +28,7 @@ export const PostCard = async ({
   const isCurrentUserPost = post.user_id === userId;
 
   return (
-    <article key={post.id} className="rounded-lg my-2">
+    <article key={post.id} className="my-2">
       <div className="flex items-center justify-between px-3 md:px-0">
         <div className="flex items-center py-3">
           {post.profiles.avatar_url ? (
@@ -77,12 +71,12 @@ export const PostCard = async ({
       </div>
 
       {/* Post Image */}
-      <div className="border relative aspect-square bg-muted">
+      <div className="border relative aspect-square bg-muted rounded-lg">
         <Image
           src={post.image_url}
           alt="Post content"
           fill
-          className="object-cover"
+          className="object-cover rounded-lg"
           priority
         />
       </div>
@@ -101,13 +95,6 @@ export const PostCard = async ({
             <Bookmark className="w-6 h-6 cursor-pointer" />
           </div>
         </div>
-
-        {/* Likes */}
-        {/* <div className="mt-2">
-    <p className="font-semibold text-sm">
-      {post.likes.length} {post.likes.length === 1 ? "like" : "likes"}
-    </p>
-  </div> */}
 
         {/* Caption */}
         <div className="mt-1">

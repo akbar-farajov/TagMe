@@ -1,12 +1,12 @@
 "use client";
-import React, { useState } from "react";
-import { Card, CardContent, CardHeader } from "../ui/card";
-import { Profile } from "@/utils/supabase/database";
-import Image from "next/image";
-import { LoaderCircle, UserCircle, UserPlus } from "lucide-react";
-import Link from "next/link";
-import { Button } from "../ui/button";
 import { followUser } from "@/app/actions/follow";
+import { Profile } from "@/utils/supabase/database";
+import { LoaderCircle, UserCircle, UserPlus } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import { Button } from "../ui/button";
+import { Card, CardContent, CardHeader } from "../ui/card";
 
 type SuggestUsersProps = {
   suggestedUsers: Profile[];
@@ -69,9 +69,9 @@ export const SuggestUsers = ({ suggestedUsers }: SuggestUsersProps) => {
               onClick={() => handleFollow(suggestedUser.id)}
             >
               {loading === suggestedUser.id ? (
-                <LoaderCircle className="w-4 h-4" />
+                <LoaderCircle className="w-4 h-4 animate-spin" />
               ) : (
-                <UserPlus className="w-4 h-4" />
+                <UserPlus className="w-4 h-4 " />
               )}
             </Button>
           </div>

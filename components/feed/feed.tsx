@@ -1,13 +1,8 @@
-import React from "react";
-import Image from "next/image";
-import { UserCircle, UserPlus } from "lucide-react";
-import { createClient } from "@/utils/supabase/server";
 import { Post, Profile } from "@/utils/supabase/database";
-import Link from "next/link";
+import { createClient } from "@/utils/supabase/server";
+import { Card, CardHeader } from "../ui/card";
 import { Separator } from "../ui/separator";
 import { PostCard } from "./post";
-import { Card, CardContent, CardHeader } from "../ui/card";
-import { Button } from "../ui/button";
 import { SuggestUsers } from "./suggest-users";
 
 export async function Feed() {
@@ -76,8 +71,8 @@ export async function Feed() {
   }
 
   return (
-    <div className="flex flex-wrap gap-4 justify-between p-4">
-      <div className="flex-1 mx-auto max-w-md mb-4 ">
+    <div className="flex gap-8 p-4 justify-between">
+      <div className="flex-1 max-w-lg mb-4 mx-auto">
         {posts.map((post) => (
           <div key={post.id}>
             <PostCard post={post} userId={user?.id} />

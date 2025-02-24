@@ -1,15 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { searchUsers } from "@/app/actions/search";
 import { Input } from "@/components/ui/input";
-import { CircleUser, Search, X } from "lucide-react";
 import { SidebarMenuItem } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { Profile } from "@/utils/supabase/database";
-import { searchUsers } from "@/app/actions/search";
-import { useTransition } from "react";
+import { Search, X } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState, useTransition } from "react";
 import { Skeleton } from "../ui/skeleton";
 import UserInfo from "../user-info";
 

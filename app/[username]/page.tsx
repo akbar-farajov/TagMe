@@ -4,6 +4,7 @@ import { signOutAction } from "@/lib/auth-actions";
 import { createClient } from "@/utils/supabase/server";
 import { CircleUser } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { FollowButton } from "./components/follow-button";
 import { FollowersDialog } from "./components/followers-dialog";
 import { Posts } from "./components/posts";
@@ -121,12 +122,14 @@ async function ProfilePage({
               />
             ) : (
               <div className="flex flex-wrap gap-2">
-                <Button
-                  variant="secondary"
-                  className="font-bold text-xs rounded-lg h-8"
-                >
-                  Edit
-                </Button>
+                <Link href={`/edit`}>
+                  <Button
+                    variant="secondary"
+                    className="font-bold text-xs rounded-lg h-8"
+                  >
+                    Edit
+                  </Button>
+                </Link>
                 <form action={signOutAction}>
                   <Button
                     type="submit"
