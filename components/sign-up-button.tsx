@@ -1,6 +1,5 @@
-import React from "react";
-import { Button } from "./ui/button";
 import { signOutAction } from "@/lib/auth-actions";
+import { Button } from "./ui/button";
 
 const SignUpButton = () => {
   return (
