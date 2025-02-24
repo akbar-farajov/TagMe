@@ -1,12 +1,12 @@
-import { createClient } from "@/utils/supabase/server";
-import { FollowButton } from "./components/follow-button";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { CircleUser, User } from "lucide-react";
-import { Posts } from "./components/posts";
 import { Separator } from "@/components/ui/separator";
 import { signOutAction } from "@/lib/auth-actions";
+import { createClient } from "@/utils/supabase/server";
+import { CircleUser } from "lucide-react";
+import Image from "next/image";
+import { FollowButton } from "./components/follow-button";
 import { FollowersDialog } from "./components/followers-dialog";
+import { Posts } from "./components/posts";
 
 async function ProfilePage({
   params,
@@ -150,10 +150,12 @@ async function ProfilePage({
               </Button>
             </FollowersDialog>
 
-            <Button variant="ghost" className="font-bold gap-1 text-base">
-              {profile.following.length}
-              <span className="font-normal">followings</span>
-            </Button>
+            <FollowersDialog followers={profile.following}>
+              <Button variant="ghost" className="font-bold gap-1 text-base">
+                {profile.following.length}
+                <span className="font-normal">followings</span>
+              </Button>
+            </FollowersDialog>
           </div>
           <div className="flex-1">
             <p className="mb-4">{profile.full_name}</p>
