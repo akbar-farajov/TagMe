@@ -1,14 +1,7 @@
 "use client";
-import {
-  Calendar,
-  CirclePlus,
-  CircleUser,
-  Home,
-  Menu,
-  Search,
-  Settings,
-} from "lucide-react";
+import { CircleUser, Home } from "lucide-react";
 
+import Logo from "@/assets/logo.svg";
 import {
   Sidebar,
   SidebarContent,
@@ -17,15 +10,14 @@ import {
   SidebarMenu,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { cn } from "@/lib/utils";
+import { Profile } from "@/utils/supabase/database";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
-import { SidebarContextMenu } from "./sidebar-context-menu";
-import Image from "next/image";
 import { CreatePostModal } from "../create-post-modal";
-import { Profile } from "@/utils/supabase/database";
 import { SearchComponent } from "../search-component/search-component";
-import Logo from "@/assets/logo.svg";
+import { SidebarContextMenu } from "./sidebar-context-menu";
 
 // Menu items.
 const items = [

@@ -1,16 +1,13 @@
-import { Profile } from "@/utils/supabase/database";
+import { cn } from "@/lib/utils";
 import { CircleUser } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
-import React from "react";
-
-interface SearchResult {}
 
 type Props = {
   username?: string;
   avatar_url?: string;
   full_name?: string;
   onclick?: () => void;
+  variant?: "hover" | "default";
 };
 
 export default function UserInfo({
@@ -18,11 +15,15 @@ export default function UserInfo({
   full_name,
   avatar_url,
   onclick,
+  variant = "default",
 }: Props) {
   return (
     <div
       onClick={onclick}
-      className="flex items-center gap-3 p-2 hover:bg-muted rounded-md cursor-pointer"
+      className={cn(
+        "flex items-center gap-3 p-2  rounded-md cursor-pointer",
+        variant === "hover" && "hover:bg-muted"
+      )}
     >
       {avatar_url ? (
         <div className="size-8 relative aspect-square">

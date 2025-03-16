@@ -122,6 +122,7 @@ export function SearchComponent() {
               <div className="space-y-2">
                 {results.map((result, index) => (
                   <UserInfo
+                    variant="hover"
                     onclick={() => handleResultClick(result)}
                     key={index}
                     username={result.data.username}

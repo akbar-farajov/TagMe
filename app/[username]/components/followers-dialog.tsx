@@ -42,6 +42,7 @@ export function FollowersDialog({
                 key={follower.id}
               >
                 <UserInfo
+                  variant="hover"
                   key={follower.id}
                   username={follower.profiles.username}
                   full_name={follower.profiles.full_name}
@@ -50,7 +51,6 @@ export function FollowersDialog({
               </Link>
             ))}
           </div>
-          <div></div>
         </DialogFooter>
       </DialogContent>
     </Dialog>

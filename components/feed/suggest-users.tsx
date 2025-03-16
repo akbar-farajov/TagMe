@@ -24,7 +24,6 @@ export const SuggestUsers = ({ suggestedUsers }: SuggestUsersProps) => {
     }
   };
 
-  console.log(loading);
   return (
     <Card className="h-max">
       <CardHeader>
